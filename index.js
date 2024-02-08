@@ -5,18 +5,21 @@ var fmem = Math.floor(os.freemem()/(1024**2));
 
 const serverless = require('serverless-http');
 const http = require('http');
+var requests = 0;
 const srv = http.createServer((req, res) => {
     if(req.url === "/") {
         res.write("Working, epic!");
         res.end();
     }
     if(req.url === "/spec") {
-        res.write("System specs: \n");
+        requests++;
+        res.write("System specs: \n\n");
         res.write(`Total Memory: ${tmem}MB \n`);
         res.write(`Free Memory: ${fmem}MB\n`);
-        res.write("Platform: "+ os.platform()+"; "+os.type() +"\n");
-        res.write("CPUs: "+ os.cpus().length +"\n");
-        res.write("Uptime: " + Math.floor(os.uptime()/60) + "min");
+        res.write("Platform: "+ os.platform()+"/"+os.type() + "; " + os.version() + "\n");
+        res.write("CPUs: "+ os.cpus().length + "x " + os.cpus()[0].model +"\n");
+        res.write("Uptime: " + Math.floor(os.uptime()/60) + "min \n \n");
+        res.write(`Requests: ${requests}`);
         res.end()
     }
 });
