@@ -3,6 +3,7 @@ const os = require('os');
 var tmem = Math.floor(os.totalmem()/(1024**2));
 var fmem = Math.floor(os.freemem()/(1024**2));
 
+const serverless = require('serverless-http');
 const http = require('http');
 const srv = http.createServer((req, res) => {
     if(req.url === "/") {
@@ -23,6 +24,8 @@ srv.listen(3000);
 srv.on("connection", (socket) => {
     console.log("Connected");
 });
+
+module.exports.handler = serverless(srv);
 /*
 console.log(`Total Memory: ${tmem}MB`);
 console.log(`Free Memory: ${fmem}MB`);

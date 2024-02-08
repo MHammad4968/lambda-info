@@ -1,11 +1,14 @@
 {
   "name": "lambda-info",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple function to check with what specifications and uptime a Lambda Serverless module is running.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "serverless-http": "^3.2.0"
+  }
 }
